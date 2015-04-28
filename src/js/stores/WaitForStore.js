@@ -1,6 +1,6 @@
 console.log('begin WaitForStore');
 
-var AppDispatcher = require('../dispatchers/AppDispatcher.react.js');
+var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var AppStore = require('../stores/AppStore.react.js');
 
 var AppConstants = require('../constants/AppConstants.js');

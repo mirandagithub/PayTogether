@@ -1,6 +1,10 @@
 console.log('begin AppStore');
 
-var AppDispatcher = require('../dispatchers/AppDispatcher.react.js');
+var React = require('react');
+var Parse = require('parse').Parse;
+var ParseReact = require('parse-react');
+
+var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var AppConstants = require('../constants/AppConstants.js');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
@@ -8,20 +12,19 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change'; // broadcast change-s
 
 
-var _welcomeMessage = '';
-
-function _morningMsg(item){
- _welcomeMessage = 'Hola, ' + item;
-};
-
-function _nightMsg(item){
-  _welcomeMessage = 'Chao, ' + item;
-};
-
-
+var user = {};
+var error = '';
 
 
 var AppStore = assign({}, EventEmitter.prototype, {
+  mixins: [ParseReact.Mixin],
+
+  observe: function() {
+    return {
+      user: ParseReact.currentUser
+    };
+  },
+
   emitChange: function(){
     console.log('AppStore emitChange');
     this.emit(CHANGE_EVENT);
@@ -46,29 +49,35 @@ Returns true if event had listeners, false otherwise.
   },
 
 
-  getMsg: function(){
-  console.log('get what\'s new from AppStore');
-  return _welcomeMessage;
+  getError: function(){
+  return error;
   },
 
+  getUser: function(){
+  return tthis.data.user;
+  },
 
   dispatchToken: AppDispatcher.register(function(payload){
    
     switch(payload.actionType){
-      case AppConstants.MORNING_MESSAGE:
-        console.log('AppStore is doing actions for Morning Msg');
-        _morningMsg(payload.item);
+      case AppConstants.USER_SIGNUP:
+        console.log('user sign up');
 
         break;
       
-      case AppConstants.NIGHT_MESSAGE:
-      console.log('AppStore is doing actions for Night Msg');
-        _nightMsg(payload.item);
+      case AppConstants.USER_LOGIN:
+        console.log('user log in');
+
+        break;
+
+      case AppConstants.USER_LOGOUT:
+        console.log('user log out');
 
         break;
 
  
     }
+
     AppStore.emitChange();
 
     return true; // due to it's "promises"

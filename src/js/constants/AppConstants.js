@@ -2,7 +2,7 @@ console.log('begin AppConstants');
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-	MORNING_MESSAGE: null,
-	NIGHT_MESSAGE: null
-
+	USER_SIGNUP:null,
+	USER_LOGIN: null,
+	USER_LOGOUT: null
 });
