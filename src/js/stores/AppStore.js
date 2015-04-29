@@ -1,8 +1,6 @@
 console.log('begin AppStore');
 
 var React = require('react');
-var Parse = require('parse').Parse;
-var ParseReact = require('parse-react');
 
 var AppDispatcher = require('../dispatchers/AppDispatcher.js');
 var AppConstants = require('../constants/AppConstants.js');
@@ -17,13 +15,6 @@ var error = '';
 
 
 var AppStore = assign({}, EventEmitter.prototype, {
-  mixins: [ParseReact.Mixin],
-
-  observe: function() {
-    return {
-      user: ParseReact.currentUser
-    };
-  },
 
   emitChange: function(){
     console.log('AppStore emitChange');
@@ -32,7 +23,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
   /* 
 emitter.emit(event[, arg1][, arg2][, ...])#
-Execute each of the listeners in order with the supplied arguments.
+Execute each of the listeners in order with the supplied arguments.f
 
 Returns true if event had listeners, false otherwise.
   */
@@ -54,7 +45,8 @@ Returns true if event had listeners, false otherwise.
   },
 
   getUser: function(){
-  return tthis.data.user;
+    debugger
+  return this.data.user;
   },
 
   dispatchToken: AppDispatcher.register(function(payload){

@@ -34,6 +34,12 @@ var AppActions = {
     });
   },
 
+  toggleSignUp: function(){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.TOGGLE_SIGNUP
+    });
+  },
+
 };
 
 

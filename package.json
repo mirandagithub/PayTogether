@@ -20,6 +20,8 @@
     "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
-    "react": "^0.12.0"
+    "react": "^0.13.0",
+    "parse": "^1.4.0",
+    "parse-react": "^0.1.3"
   }
 }
